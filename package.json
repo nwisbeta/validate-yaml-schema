@@ -1,0 +1,34 @@
+{
+  "name": "validate-yaml-schema",
+  "version": "0.0.1",
+  "description": "Validate a YAML file against a JSON Schema",
+  "main": "index.js",
+  "scripts": {
+    "start" : "tsc && node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc" : "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwisbeta/validate-yaml-schema.git"
+  },
+  "keywords": [
+    "yaml",
+    "JSON",
+    "schema",
+    "validation"
+  ],
+  "author": "huw.angle@wales.nhs.uk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwisbeta/validate-yaml-schema/issues"
+  },
+  "homepage": "https://github.com/nwisbeta/validate-yaml-schema#readme",
+  "dependencies": {
+    "yaml-language-server": "^0.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.1",
+    "typescript": "^3.7.5"
+  }
+}
