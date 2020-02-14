@@ -5,4 +5,4 @@ outputs:
     description: 'Results of the schema validation'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'dist/main.js'
