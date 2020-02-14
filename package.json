@@ -2,11 +2,11 @@
   "name": "validate-yaml-schema",
   "version": "0.0.1",
   "description": "Validate a YAML file against a JSON Schema",
-  "main": "index.js",
+  "main": "dist/schema-validator.js",
   "scripts": {
-    "start" : "tsc && node ./dist/index.js",
+    "start": "tsc && node dist/schema-validator.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc" : "tsc"
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
