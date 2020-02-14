@@ -1,0 +1,8 @@
+name: 'YAML Schema Validator'
+description: 'Validate YAML files in a repo according to settings'
+outputs:
+  validationResults: 
+    description: 'Results of the schema validation'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

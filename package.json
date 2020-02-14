@@ -23,8 +23,10 @@
   "bugs": {
     "url": "https://github.com/nwisbeta/validate-yaml-schema/issues"
   },
-  "homepage": "https://github.com/nwisbeta/validate-yaml-schema#readme",
+  "homepage": "https://github.com/nwisbeta/validate-yaml-schema",
   "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/github": "^2.1.0",
     "yaml-language-server": "^0.7.2"
   },
   "devDependencies": {
