@@ -5,7 +5,7 @@ import { InvalidJsonFileError } from './errors';
 export const getYaml = async (filePath: string): Promise<TextDocument> => {
     //TODO: return a real document
     return TextDocument.create(
-        'file://~/Desktop/my-document.yaml',
+        filePath,
         'yaml',
         0,
         'prop1: test\nprop2: test1'

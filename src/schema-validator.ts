@@ -38,7 +38,7 @@ export class SchemaValidator {
   private getLanguageService(workspaceRoot : string){
 
     // Request Service: Fetches file content from given location
-    const requestService = schemaRequestHandler.bind(workspaceRoot);
+    const requestService = schemaRequestHandler.bind(null, workspaceRoot);
     
     // Context Service: Resolves relative file locations (not sure why it's needed as request service handles that too...)
     const contextService = {

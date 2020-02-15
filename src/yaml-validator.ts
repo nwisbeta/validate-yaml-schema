@@ -14,8 +14,8 @@ export const validateYaml = async ( workspaceRoot: string): Promise<ValidationRe
     try {
         //Get the schema settings
         const settings  = await getJson(path.join(workspaceRoot, '.vscode/settings.json'));
-        //TODO: const schemas = settings?.yaml?.schemas;
-        const schemas = { uri: 'http://json.schemastore.org/package', fileMatch: ['*.yml', '*.yaml'] }
+        const schemas = settings ? settings['yaml.schemas'] : null;
+
         if(!schemas)
             throw 'no schema settings found';
 
@@ -28,7 +28,7 @@ export const validateYaml = async ( workspaceRoot: string): Promise<ValidationRe
         return await Promise.all(
             filePaths.map(async filePath => {
                 try {
-                    const yamlDocument = await getYaml(filePath);
+                    const yamlDocument = await getYaml(path.join(workspaceRoot,filePath));
                     const result = await schemaValidator.doValidation(yamlDocument);
                     prettyLog(filePath);
                     return { filePath, valid: result };
