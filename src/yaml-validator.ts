@@ -29,7 +29,7 @@ export const validateYaml = async ( workspaceRoot: string): Promise<ValidationRe
             filePaths.map(async filePath => {
                 try {
                     const yamlDocument = await getYaml(path.join(workspaceRoot,filePath));
-                    const result = await schemaValidator.doValidation(yamlDocument);
+                    const result = await schemaValidator.isValid(yamlDocument);
                     prettyLog(filePath);
                     return { filePath, valid: result };
                 } catch (e) {
