@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { TextDocument } from 'vscode-languageserver';
+import { glob } from 'glob'
 import { getYaml, getJson } from './yaml-file-reader';
 import { SchemaValidator } from './schema-validator';
 import { prettyLog } from './logger';
@@ -22,8 +22,22 @@ export const validateYaml = async ( workspaceRoot: string): Promise<ValidationRe
         const schemaValidator = new SchemaValidator(schemas, workspaceRoot);
 
 
-        //TODO: loop through all yaml files and request validation
-        const filePaths : string[] = ['/catalogue/ac3/system.yml'];      
+        //TODO: improve this implementation - e.g. use the glob patterns from the yaml.schemas settings        
+        const filePaths = await new Promise<string[]>((c,e) => {
+            glob(
+                '**/*.yml', 
+                {
+                    cwd : workspaceRoot,
+                    silent : true,
+                    nodir : true,
+                },
+                (err, files) => { 
+                    if (err) {
+                        //console.log(err)
+                    }                      
+                    c(files);
+                });
+        });
     
         return await Promise.all(
             filePaths.map(async filePath => {

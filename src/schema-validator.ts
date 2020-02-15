@@ -62,7 +62,8 @@ export class SchemaValidator {
 
     const results = await this.languageService.doValidation(yamlDocument, false);
 
-    if (results) {
+    if (results.length) {
+      console.log(yamlDocument.uri);
       console.log(JSON.stringify(results));
       return false;
     }

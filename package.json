@@ -26,6 +26,7 @@
   "homepage": "https://github.com/nwisbeta/validate-yaml-schema",
   "dependencies": {
     "@actions/core": "^1.2.2",
+    "glob": "^7.1.6",
     "yaml-language-server": "^0.7.2"
   },
   "devDependencies": {
