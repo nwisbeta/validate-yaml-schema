@@ -5,7 +5,7 @@ import { join } from 'path';
 
 
 const isRelativePath = (path: string): boolean => {
-    const relativePathRegex = /^(((\.\.?)|([\w-\. ]+))(\/|\\\\?))*[\w-\. ]*\.[\w-]+$/i;
+    const relativePathRegex = /(\/|\\\\?)?((\.\.?)(\/|\\\\?))+[\w-\. ]*/i;
     return relativePathRegex.test(path);
 };
 
@@ -18,17 +18,15 @@ export const schemaRequestHandler = (workspaceRoot: string, uri: string): Thenab
         return Promise.reject('No schema specified');
     }
 
-    // If the requested schema URI is a relative file path
-    // Convert it into a proper absolute path URI
-    if (isRelativePath(uri)) {
-        uri = join(workspaceRoot, uri);
-    }
-
     const scheme = URI.parse(uri).scheme.toLowerCase();
 
     // If the requested schema is a local file, read and return the file contents
     if (scheme === 'file') {
-        const fsPath = URI.parse(uri).fsPath;
+        let fsPath = URI.parse(uri).fsPath;
+
+        if (isRelativePath(fsPath)) {
+            fsPath = join(workspaceRoot, fsPath);
+        }
 
         return new Promise<string>((c, e) => {
             fs.readFile(fsPath, 'UTF-8', (err, result) =>
