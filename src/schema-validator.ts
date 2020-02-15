@@ -58,12 +58,16 @@ export class SchemaValidator {
   }
 
 
-  public doValidation(yamlDocument : TextDocument) : boolean {
+  public async isValid(yamlDocument : TextDocument) : Promise<boolean> {
 
-    this.languageService.doValidation(yamlDocument, false).then(function (result) {
-      console.log(JSON.stringify(result));
-    });
-    return true; //TODO: figure out when to throw an error
+    const results = await this.languageService.doValidation(yamlDocument, false);
+
+    if (results) {
+      console.log(JSON.stringify(results));
+      return false;
+    }
+      
+    return true;
   }
 
 };
