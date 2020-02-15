@@ -1,15 +1,19 @@
 import * as fs from 'fs';
 import { TextDocument } from 'vscode-languageserver';
-import { InvalidJsonFileError } from './errors';
+import { InvalidFileError } from './errors';
 
 export const getYaml = async (filePath: string): Promise<TextDocument> => {
-    //TODO: return a real document
-    return TextDocument.create(
-        filePath,
-        'yaml',
-        0,
-        'prop1: test\nprop2: test1'
-      );
+    try {
+        const fileContents = await fs.promises.readFile(filePath, { encoding: 'utf-8' });
+        return TextDocument.create(
+            filePath,
+            'yaml',
+            0,
+            fileContents
+          );
+    } catch (ex) {
+        throw new InvalidFileError(filePath, ex);
+    }
 };
 
 
@@ -19,6 +23,6 @@ export const getJson = async (filePath: string): Promise<any> => {
         const json = JSON.parse(fileContents);
         return json;
     } catch (ex) {
-        throw new InvalidJsonFileError(filePath, ex);
+        throw new InvalidFileError(filePath, ex);
     }
 };
