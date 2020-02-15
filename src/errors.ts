@@ -1,6 +1,6 @@
 interface ValidationError {}
 
-export class InvalidJsonFileError extends Error implements ValidationError {
+export class InvalidFileError extends Error implements ValidationError {
     public filePath: string;
     public innerError: Error | object;
 

@@ -1,5 +1,5 @@
 // import chalk from 'chalk';
-import { InvalidSchemaError, InvalidJsonError, InvalidJsonFileError } from './errors';
+import { InvalidSchemaError, InvalidJsonError, InvalidFileError } from './errors';
 
 export const prettyLog = (filePath: string, error?: Error): void => {
     // const prettyFilePath = chalk`{grey {bold {underline ${filePath}}}}`;
@@ -16,8 +16,8 @@ export const prettyLog = (filePath: string, error?: Error): void => {
             const jsonErr = error as InvalidJsonError;
             output = `${output}${jsonErr.enrichedError || jsonErr.reason}`;
             break;
-        case error instanceof InvalidJsonFileError:
-            const fileErr = error as InvalidJsonFileError;
+        case error instanceof InvalidFileError:
+            const fileErr = error as InvalidFileError;
             const reason =
                 fileErr.innerError instanceof Error
                     ? `${fileErr.innerError.name}${fileErr.innerError.message}`
