@@ -2,9 +2,9 @@
   "name": "validate-yaml-schema",
   "version": "0.0.1",
   "description": "Validate a YAML file against a JSON Schema",
-  "main": "dist/main.js",
+  "main": "lib/index.js",
   "scripts": {
-    "start": "tsc && node dist/main.js",
+    "start": "webpack --config webpack.config.js && node lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc"
   },
@@ -31,6 +31,10 @@
   },
   "devDependencies": {
     "@types/node": "^13.7.1",
-    "typescript": "^3.7.5"
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "umd-compat-loader": "^2.1.2",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
