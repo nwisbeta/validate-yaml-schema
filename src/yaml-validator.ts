@@ -33,7 +33,7 @@ export const validateYaml = async ( workspaceRoot: string): Promise<ValidationRe
                 },
                 (err, files) => { 
                     if (err) {
-                        //console.log(err)
+                        e(err)
                     }                      
                     c(files);
                 });
