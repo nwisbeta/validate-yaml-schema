@@ -11,12 +11,15 @@ async function run() {
 
     const invalidResults = validationResults.filter(res => !res.valid).map(res => res.filePath);
 
-    core.setOutput('invalidFiles', invalidResults.length > 0 ? invalidResults.join(',') : '');
+    const invalidFiles = invalidResults.length > 0 ? invalidResults.join(',') : '';
+
+    core.setOutput('invalidFiles', invalidFiles);
 
     if (invalidResults.length > 0) {
-        core.setFailed('Failed to validate all YAML files.');
+        core.warning('Invalid Files: ' + invalidFiles);
+        core.setFailed('Schema validation failed on one or more YAML files.');
     } else {
-        core.info(`✅ All files were validated succesfully.`);
+        core.info(`✅ YAML Schema validation completed successfully`);
     }
 
   } catch (error) {
