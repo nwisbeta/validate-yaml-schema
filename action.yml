@@ -1,8 +1,8 @@
 name: 'YAML Schema Validator'
 description: 'Validate YAML files in a repo according to settings'
 outputs:
-  validationResults: 
-    description: 'Results of the schema validation'
+  invalidFiles: 
+    description: 'Comma separated list of files that failed the schema validation'
 runs:
   using: 'node12'
   main: 'lib/index.js'

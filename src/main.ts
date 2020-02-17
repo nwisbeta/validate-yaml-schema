@@ -11,7 +11,7 @@ async function run() {
 
     const invalidResults = validationResults.filter(res => !res.valid).map(res => res.filePath);
 
-    core.setOutput('INVALID', invalidResults.length > 0 ? invalidResults.join(',') : '');
+    core.setOutput('invalidFiles', invalidResults.length > 0 ? invalidResults.join(',') : '');
 
     if (invalidResults.length > 0) {
         core.setFailed('Failed to validate all YAML files.');

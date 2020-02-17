@@ -10,13 +10,13 @@ No inputs needed, the schema mappings will be read from the **.vscode/settings.j
 
 ## Outputs
 
-### `validationResults`
+### `invalidFiles`
 
-The time we greeted you.
+A comma separated list of files that failed the schema validation
 
 ## Example usage
 
-    uses: nwisbeta/validate-yaml-schema@v1
+    uses: nwisbeta/validate-yaml-schema@v0.1-alpha
 
 ## Thanks
 
