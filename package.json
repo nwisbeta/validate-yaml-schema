@@ -25,16 +25,16 @@
   },
   "homepage": "https://github.com/nwisbeta/validate-yaml-schema",
   "dependencies": {
-    "@actions/core": "^1.2.2",
+    "@actions/core": "^1.2.3",
     "glob": "^7.1.6",
     "yaml-language-server": "^0.7.2"
   },
   "devDependencies": {
-    "@types/node": "^13.7.1",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5",
+    "@types/node": "^13.11.0",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
     "umd-compat-loader": "^2.1.2",
-    "webpack": "^4.41.6",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }
 }
