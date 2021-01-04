@@ -48,9 +48,7 @@ export class SchemaValidator {
 
     const languageService = getLanguageService(
       requestService,
-      contextService,
-      [],
-      null
+      contextService
     );
     languageService.configure(this.languageSettings);
 

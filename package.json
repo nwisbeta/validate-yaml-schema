@@ -27,14 +27,14 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "glob": "^7.1.6",
-    "yaml-language-server": "^0.7.2"
+    "yaml-language-server": "^0.13.0"
   },
   "devDependencies": {
-    "@types/node": "^13.11.0",
+    "@types/node": "^13.13.38",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.8.3",
+    "typescript": "^3.9.7",
     "umd-compat-loader": "^2.1.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
   }
 }

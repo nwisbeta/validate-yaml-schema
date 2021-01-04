@@ -15,7 +15,7 @@ module.exports = {
             exclude: /node_modules/
         },
         {
-            test:/node_modules[\\|/](yaml-language-server|vscode-languageserver|prettier)/,
+            test:/node_modules[\\|/](yaml-language-server|vscode-languageserver|vscode-json-languageservice|prettier)/,
             use: 'umd-compat-loader'
         }
     ]
