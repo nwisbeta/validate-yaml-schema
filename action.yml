@@ -1,5 +1,10 @@
 name: 'YAML Schema Validator'
 description: 'Validate YAML files in a repo according to settings'
+inputs:
+  settingsFile: 
+    description: 'Location of schema configuration file'
+    required: false
+    default: '.vscode/settings.json'
 outputs:
   invalidFiles: 
     description: 'Comma separated list of files that failed the schema validation'

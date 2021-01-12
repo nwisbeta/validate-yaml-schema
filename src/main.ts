@@ -5,9 +5,10 @@ async function run() {
   try {
 
     const workspaceRoot = <string>process.env['GITHUB_WORKSPACE'];
-   
 
-    const validationResults = await validateYaml(workspaceRoot);
+    const settingsFile = core.getInput('settingsfile');
+   
+    const validationResults = await validateYaml(workspaceRoot, settingsFile);
 
     const invalidResults = validationResults.filter(res => !res.valid).map(res => res.filePath);
 

@@ -4,6 +4,17 @@ This action validates YAML files using the `yaml.schemas` settings for the [VS C
 
 All you need is a **.vscode/settings.json** document at the root of the repository that contains the `yaml.schemas` setting
 
+## Inputs
+
+### `settingsFile` (optional)
+
+Location of the schema configuration file.  
+
+The default location is **.vscode/settings.json**, you can change it do a different location but it but still be a json document containing the `yaml.schemas` config.
+See the [VS Code YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for how to structure the config.
+
+
+
 ## Outputs
 
 ### `invalidFiles`

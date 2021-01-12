@@ -9,11 +9,11 @@ export interface ValidationResult {
     valid: boolean;
 }
 
-export const validateYaml = async ( workspaceRoot: string): Promise<ValidationResult[]> => {
+export const validateYaml = async ( workspaceRoot: string, settingsFile: any): Promise<ValidationResult[]> => {
 
     try {
         //Get the schema settings
-        const settings  = await getJson(path.join(workspaceRoot, '.vscode/settings.json'));
+        const settings  = await getJson(path.join(workspaceRoot, settingsFile));
         const schemas = settings ? settings['yaml.schemas'] : null;
 
         if(!schemas)
