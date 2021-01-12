@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { glob } from 'glob'
-import { getYaml, getJson } from './yaml-file-reader';
+import { getYaml } from './file-reader';
 import { SchemaValidator } from './schema-validator';
 import { prettyLog } from './logger';
 
@@ -9,14 +9,11 @@ export interface ValidationResult {
     valid: boolean;
 }
 
-export const validateYaml = async ( workspaceRoot: string, settingsFile: any): Promise<ValidationResult[]> => {
+export const validateYaml = async ( workspaceRoot: string, schemas: any): Promise<ValidationResult[]> => {
 
     try {
-        //Get the schema settings
-        const settings  = await getJson(path.join(workspaceRoot, settingsFile));
-        const schemas = settings ? settings['yaml.schemas'] : null;
 
-        if(!schemas)
+        if(!schemas || Object.keys(schemas).length === 0)
             throw 'no schema settings found';
 
         const schemaValidator = new SchemaValidator(schemas, workspaceRoot);

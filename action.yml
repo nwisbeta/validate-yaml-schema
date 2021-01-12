@@ -5,6 +5,9 @@ inputs:
     description: 'Location of schema configuration file'
     required: false
     default: '.vscode/settings.json'
+  yamlSchemasJson:
+    description: 'The yaml.schemas config as inline JSON'
+    required: false
 outputs:
   invalidFiles: 
     description: 'Comma separated list of files that failed the schema validation'

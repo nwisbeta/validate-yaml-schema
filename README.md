@@ -14,6 +14,24 @@ The default location is **.vscode/settings.json**, you can change it do a differ
 See the [VS Code YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for how to structure the config.
 
 
+### `yamlSchemasJson` (optional)
+
+The yaml.schemas config as inline JSON
+
+Instead of adding the `yaml.schemas` config to a file, you can instead supply it as inline JSON, e.g.:
+
+```yaml
+      - uses: nwisbeta/validate-yaml-schema@v1.0.3
+        with:
+          yamlSchemasJson: |
+            {
+                "http://json.schemastore.org/composer": ["/*"],
+                "file:///home/johnd/some-schema.json": ["some.yaml"],
+                "../relative/path/schema.json": ["/config*.yaml"],
+                "/Users/johnd/some-schema.json": ["some.yaml"],
+            }
+```
+
 
 ## Outputs
 
@@ -28,7 +46,7 @@ A comma separated list of files that failed the schema validation.
 
     steps:
       - uses: actions/checkout@v2
-      - uses: nwisbeta/validate-yaml-schema@v1.0
+      - uses: nwisbeta/validate-yaml-schema@v1.0.3
 
 ## Thanks
 This action has been made by 're-mixing' logic from these repos: 
