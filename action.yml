@@ -1,7 +1,7 @@
-name: 'YAML Schema Validator'
+name: 'vscode-yaml validator'
 description: 'Validate YAML files in a repo according to settings'
 inputs:
-  settingsFile: 
+  settingsFile:
     description: 'Location of schema configuration file'
     required: false
     default: '.vscode/settings.json'
@@ -9,11 +9,11 @@ inputs:
     description: 'The yaml.schemas config as inline JSON'
     required: false
 outputs:
-  invalidFiles: 
+  invalidFiles:
     description: 'Comma separated list of files that failed the schema validation'
 runs:
   using: 'node12'
   main: 'lib/index.js'
-branding: 
+branding:
   icon: 'check'
   color: orange
