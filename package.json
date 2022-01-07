@@ -4,7 +4,8 @@
   "description": "Validate a YAML file against a JSON Schema",
   "main": "lib/index.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js && node lib/index.js",
+    "build": "webpack --config webpack.config.js",
+    "start": "npm run build && node lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc"
   },

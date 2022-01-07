@@ -18,24 +18,31 @@ export const validateYaml = async ( workspaceRoot: string, schemas: any): Promis
 
         const schemaValidator = new SchemaValidator(schemas, workspaceRoot);
 
+        const filePathPatternsBySchema: any = Object.values(schemas)
+        const filePathPatterns = ['**/*.{yml,yaml}'].concat(...filePathPatternsBySchema);
 
-        //TODO: improve this implementation - e.g. use the glob patterns from the yaml.schemas settings        
-        const filePaths = await new Promise<string[]>((c,e) => {
-            glob(
-                '**/*.{yml,yaml}', 
-                {
-                    cwd : workspaceRoot,
-                    silent : true,
-                    nodir : true,
-                },
-                (err, files) => { 
-                    if (err) {
-                        e(err)
-                    }                      
-                    c(files);
-                });
+
+        const filePathsByPattern = await Promise.all(filePathPatterns.map(async filePathPattern => {
+            return await new Promise<string[]>((c,e) => {
+                glob(
+                    filePathPattern,
+                    {
+                        cwd : workspaceRoot,
+                        silent : true,
+                        nodir : true,
+                    },
+                    (err, files) => {
+                        if (err) {
+                            e(err)
+                        }
+                        c(files);
+                    });
+            });
+        }));
+        const filePaths = [].concat(...filePathsByPattern).filter((value, index, self) => {
+            return value && self.indexOf(value) === index;
         });
-    
+
         return await Promise.all(
             filePaths.map(async filePath => {
                 try {
@@ -54,5 +61,3 @@ export const validateYaml = async ( workspaceRoot: string, schemas: any): Promis
         return [{ filePath: workspaceRoot, valid: false }];
     }
 };
-
-
