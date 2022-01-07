@@ -27,13 +27,16 @@ async function run() {
     }
     const schemas = {...settingsYamlSchemas, ...inlineYamlSchemas };
 
-   
+
     const validationResults = await validateYaml(workspaceRoot, schemas);
 
+    const validResults = validationResults.filter(res => res.valid).map(res => res.filePath);
     const invalidResults = validationResults.filter(res => !res.valid).map(res => res.filePath);
 
+    const validFiles = validResults.length > 0 ? validResults.join(',') : '';
     const invalidFiles = invalidResults.length > 0 ? invalidResults.join(',') : '';
 
+    core.setOutput('validFiles', validFiles);
     core.setOutput('invalidFiles', invalidFiles);
 
     if (invalidResults.length > 0) {
