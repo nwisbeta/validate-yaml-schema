@@ -8,7 +8,7 @@ All you need is a **.vscode/settings.json** document at the root of the reposito
 
 ### `settingsFile` (optional)
 
-Location of the schema configuration file.  
+Location of the schema configuration file.
 
 The default location is **.vscode/settings.json**, you can change it do a different location but it but still be a json document containing the `yaml.schemas` config.
 See the [VS Code YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for how to structure the config.
@@ -35,9 +35,13 @@ Instead of adding the `yaml.schemas` config to a file, you can instead supply it
 
 ## Outputs
 
+### `validFiles`
+
+A comma separated list of files that passed the schema validation.
+
 ### `invalidFiles`
 
-A comma separated list of files that failed the schema validation.  
+A comma separated list of files that failed the schema validation.
 
  > Schema validation fails if any results are returned from the YAML Language Server
 
@@ -49,6 +53,6 @@ A comma separated list of files that failed the schema validation.
       - uses: nwisbeta/validate-yaml-schema@v1.0.3
 
 ## Thanks
-This action has been made by 're-mixing' logic from these repos: 
- - https://github.com/OrRosenblatt/validate-json-action 
+This action has been made by 're-mixing' logic from these repos:
+ - https://github.com/OrRosenblatt/validate-json-action
  - https://github.com/redhat-developer/yaml-language-server
