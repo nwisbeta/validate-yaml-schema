@@ -18,9 +18,7 @@ export const validateYaml = async ( workspaceRoot: string, schemas: any): Promis
 
         const schemaValidator = new SchemaValidator(schemas, workspaceRoot);
 
-        const filePathPatternsBySchema: any = Object.values(schemas)
-        const filePathPatterns = ['**/*.{yml,yaml}'].concat(...filePathPatternsBySchema);
-
+        const filePathPatterns = [].concat(...Object.values(schemas));
 
         const filePathsByPattern = await Promise.all(filePathPatterns.map(async filePathPattern => {
             return await new Promise<string[]>((c,e) => {
