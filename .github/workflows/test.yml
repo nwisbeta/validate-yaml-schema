@@ -1,0 +1,28 @@
+name: Test
+on: [push]
+jobs:
+  Use-Action:
+    name: Use Action
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - id: validate-yaml-schema
+        uses: ./
+        with:
+          yamlSchemasJson: |
+            {
+              "https://json.schemastore.org/github-action.json": ["action.yml", "action.yaml"],
+              "https://json.schemastore.org/github-workflow.json": [".github/workflows/*.yml", ".github/workflows/*.yaml"]
+            }
+      - run: |
+          for f in action.yml .github/workflows/test.yml; do
+            if $(jq "split(\",\") | all(. != \"$f\")" <<< '"${{ steps.validate-yaml-schema.outputs.validFiles }}"'); then
+              echo "$f was not validated"
+              exit 1
+            fi
+          done
+        shell: bash
