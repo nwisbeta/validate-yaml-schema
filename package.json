@@ -1,6 +1,6 @@
 {
   "name": "validate-yaml-schema",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "Validate a YAML file against a JSON Schema",
   "main": "lib/index.js",
   "scripts": {
@@ -26,16 +26,16 @@
   },
   "homepage": "https://github.com/nwisbeta/validate-yaml-schema",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "glob": "^7.1.6",
+    "@actions/core": "^1.6.0",
+    "glob": "^7.2.0",
     "yaml-language-server": "^0.13.0"
   },
   "devDependencies": {
-    "@types/node": "^13.13.38",
+    "@types/node": "^13.13.52",
     "ts-loader": "^6.2.2",
-    "typescript": "^3.9.7",
+    "typescript": "^3.9.10",
     "umd-compat-loader": "^2.1.2",
-    "webpack": "^5.11.1",
-    "webpack-cli": "^4.3.1"
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   }
 }
