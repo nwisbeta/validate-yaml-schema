@@ -28,7 +28,8 @@ export const validateYaml = async ( workspaceRoot: string, schemas: any): Promis
                         cwd : workspaceRoot,
                         silent : true,
                         nodir : true,
-                        matchBase : true
+                        matchBase : true,
+                        dot: true
                     },
                     (err, files) => {
                         if (err) {
