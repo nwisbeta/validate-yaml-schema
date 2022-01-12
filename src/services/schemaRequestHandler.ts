@@ -29,7 +29,7 @@ export const schemaRequestHandler = (workspaceRoot: string, uri: string): Thenab
         }
 
         return new Promise<string>((c, e) => {
-            fs.readFile(fsPath, 'UTF-8', (err, result) =>
+            fs.readFile(fsPath, { encoding: 'utf-8'}, (err, result) =>
                 // If there was an error reading the file, return empty error message
                 // Otherwise return the file contents as a string
                 err ? e('') : c(result.toString())

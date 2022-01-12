@@ -1,16 +1,18 @@
 import * as URL from 'url';
-import { TextDocument } from 'vscode-languageserver';
-import { getLanguageService, LanguageSettings, LanguageService, SchemaRequestService } from 'yaml-language-server'
+import { TextDocument } from 'vscode-languageserver-textdocument';
+import { LanguageSettings } from 'yaml-language-server'
+import { YAMLValidation } from 'yaml-language-server/lib/umd/languageservice/services/yamlValidation'
+import { YAMLSchemaService } from 'yaml-language-server/lib/umd/languageservice/services/yamlSchemaService'
 import { schemaRequestHandler } from './services/schemaRequestHandler'
 
 export class SchemaValidator { 
 
   constructor(schemaSettings : any, workspaceRoot : string) {
     this.addSchemaSettings(schemaSettings);     
-    this.getLanguageService(workspaceRoot);
+    this.buildValidator(workspaceRoot);
   }
 
-  private languageService : LanguageService;
+  private validator : YAMLValidation;
 
   private languageSettings : LanguageSettings = {
     validate: true, // Turn on validation, turn off everything else
@@ -35,7 +37,7 @@ export class SchemaValidator {
     }
   }
 
-  private getLanguageService(workspaceRoot : string){
+  private buildValidator(workspaceRoot : string){
 
     // Request Service: Fetches file content from given location
     const requestService = schemaRequestHandler.bind(null, workspaceRoot);
@@ -46,19 +48,38 @@ export class SchemaValidator {
         URL.resolve(resource, relativePath)  
     };
 
-    const languageService = getLanguageService(
-      requestService,
-      contextService
-    );
-    languageService.configure(this.languageSettings);
+    /////////////////////////////////////////////////////////////////////
+    // "borrowed" from https://github.com/redhat-developer/yaml-language-server/blob/4a36b9b26f4b0322128d7db1afb1d25f21c8cbea/src/languageservice/yamlLanguageService.ts#L189
 
-    this.languageService = languageService;
+    const yamlSchemaService = new YAMLSchemaService(requestService, contextService);
+    const yamlValidation = new YAMLValidation(yamlSchemaService);
+    const settings = this.languageSettings;
+
+    yamlSchemaService.clearExternalSchemas();
+      if (settings.schemas) {
+        yamlSchemaService.schemaPriorityMapping = new Map();
+        settings.schemas.forEach((settings) => {
+          const currPriority = settings.priority ? settings.priority : 0;
+          yamlSchemaService.addSchemaPriority(settings.uri, currPriority);
+          yamlSchemaService.registerExternalSchema(
+            settings.uri,
+            settings.fileMatch,
+            settings.schema,
+            settings.name,
+            settings.description
+          );
+        });
+      }
+      yamlValidation.configure(settings);
+      /////////////////////////////////////////////////////////////////////
+
+    this.validator = yamlValidation;
   }
 
 
   public async isValid(yamlDocument : TextDocument) : Promise<boolean> {
 
-    const results = await this.languageService.doValidation(yamlDocument, false);
+    const results = await this.validator.doValidation(yamlDocument, false);
 
     if (results.length) {
       console.log(yamlDocument.uri);

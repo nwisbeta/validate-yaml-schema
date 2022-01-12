@@ -1,6 +1,6 @@
 {
   "name": "validate-yaml-schema",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Validate a YAML file against a JSON Schema",
   "main": "lib/index.js",
   "scripts": {
@@ -28,14 +28,17 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "glob": "^7.2.0",
-    "yaml-language-server": "^0.13.0"
+    "yaml-language-server": "1.2.2"
   },
   "devDependencies": {
-    "@types/node": "^13.13.52",
-    "ts-loader": "^6.2.2",
-    "typescript": "^3.9.10",
+    "@types/node": "^17.0.8",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
     "umd-compat-loader": "^2.1.2",
-    "webpack": "^5.65.0",
+    "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1"
+  },
+  "engines": {
+    "node": "^14.0.0"
   }
 }
