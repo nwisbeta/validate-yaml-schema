@@ -2,13 +2,15 @@ import * as URL from 'url';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { LanguageSettings } from 'yaml-language-server'
 import { YAMLValidation } from 'yaml-language-server/lib/umd/languageservice/services/yamlValidation'
+import { YamlVersion } from 'yaml-language-server/lib/umd/languageservice/parser/yamlParser07'
 import { YAMLSchemaService } from 'yaml-language-server/lib/umd/languageservice/services/yamlSchemaService'
 import { schemaRequestHandler } from './services/schemaRequestHandler'
 
 export class SchemaValidator { 
 
-  constructor(schemaSettings : any, workspaceRoot : string) {
+  constructor(schemaSettings : any, workspaceRoot : string, yamlVersion: string) {
     this.addSchemaSettings(schemaSettings);     
+    this.setYamlVersion(yamlVersion)
     this.buildValidator(workspaceRoot);
   }
 
@@ -23,6 +25,11 @@ export class SchemaValidator {
     schemas: [],
     customTags: []
   };
+
+  private setYamlVersion(version: string) {
+    const yamlVersion = version? <YamlVersion>(version) : <YamlVersion>"1.2";
+    this.languageSettings.yamlVersion = yamlVersion;
+  }
 
   private addSchemaSettings(schemaSettings) {
   

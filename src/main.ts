@@ -11,6 +11,7 @@ async function run() {
 
     const settingsFile = core.getInput('settingsfile');
     const yamlSchemasJson = core.getInput('yamlSchemasJson');
+    const yamlVersionInput = core.getInput('yamlVersion');
 
     // Settings checking
 
@@ -21,14 +22,17 @@ async function run() {
     }
 
     let settingsYamlSchemas;
-    if (fs.existsSync(settingsFile)){
+    let settingsYamlVersion;
+    if (fs.existsSync(path.join(workspaceRoot, settingsFile))){
       const settings  = await getJson(path.join(workspaceRoot, settingsFile));
       settingsYamlSchemas = settings ? settings['yaml.schemas'] : null;
+      settingsYamlVersion = settings ? settings['yaml.yamlVersion']: null;
     }
     const schemas = {...settingsYamlSchemas, ...inlineYamlSchemas };
 
+    const yamlVersion = yamlVersionInput ? yamlVersionInput : settingsYamlVersion;
 
-    const validationResults = await validateYaml(workspaceRoot, schemas);
+    const validationResults = await validateYaml(workspaceRoot, schemas, yamlVersion);
 
     const validResults = validationResults.filter(res => res.valid).map(res => res.filePath);
     const invalidResults = validationResults.filter(res => !res.valid).map(res => res.filePath);

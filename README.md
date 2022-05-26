@@ -14,6 +14,11 @@ The default location is **.vscode/settings.json**, you can change it do a differ
 See the [VS Code YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) for how to structure the config.
 
 
+### `yamlVersion` (optional)
+
+Yaml version used for validation, default is `1.2` or the value read from `yaml.yamlVersion` key in **.vscode/settings.json**
+
+
 ### `yamlSchemasJson` (optional)
 
 The yaml.schemas config as inline JSON
@@ -21,7 +26,7 @@ The yaml.schemas config as inline JSON
 Instead of adding the `yaml.schemas` config to a file, you can instead supply it as inline JSON, e.g.:
 
 ```yaml
-      - uses: nwisbeta/validate-yaml-schema@v1.0.3
+      - uses: nwisbeta/validate-yaml-schema@v2.0.0
         with:
           yamlSchemasJson: |
             {

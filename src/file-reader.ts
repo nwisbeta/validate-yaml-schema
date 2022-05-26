@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { TextDocument } from 'vscode-languageserver';
+import { TextDocument } from 'vscode-languageserver-textdocument';
 import { InvalidFileError } from './errors';
 
 export const getYaml = async (filePath: string): Promise<TextDocument> => {

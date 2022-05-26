@@ -9,14 +9,14 @@ export interface ValidationResult {
     valid: boolean;
 }
 
-export const validateYaml = async ( workspaceRoot: string, schemas: any): Promise<ValidationResult[]> => {
+export const validateYaml = async ( workspaceRoot: string, schemas: any, yamlVersion: string): Promise<ValidationResult[]> => {
 
     try {
 
         if(!schemas || Object.keys(schemas).length === 0)
             throw 'no schema settings found';
 
-        const schemaValidator = new SchemaValidator(schemas, workspaceRoot);
+        const schemaValidator = new SchemaValidator(schemas, workspaceRoot, yamlVersion);
 
         const filePathPatterns = [].concat(...Object.values(schemas));
 
