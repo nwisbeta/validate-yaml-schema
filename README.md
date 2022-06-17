@@ -1,3 +1,6 @@
+> **DEPRECATION NOTICE**: This action has been removed from the GitHub marketplace and will receive no further updates.  
+> If you'd like fork the code and publish it yourself, you're free to do so under the [Creative Commons License](https://github.com/nwisbeta/validate-yaml-schema/blob/master/LICENSE.md)
+
 # Validate YAML Schema
 
 This action validates YAML files using the `yaml.schemas` settings for the [VS Code YAML Extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
